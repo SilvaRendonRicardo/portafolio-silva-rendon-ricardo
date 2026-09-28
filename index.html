@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Ricardo Silva Rendon · Portafolio</title>
+  <title>Silva Rendon Ricardo · Portafolio</title>
 
-  <meta name="description" content="Portafolio de Ricardo Silva Rendon — Aplicaciones Web, Django, MySQL, Tailwind y Render.">
+  <meta name="description" content="Portafolio de Silva Rendon Ricardo — Aplicaciones Web, Django, MySQL, Tailwind y Render.">
 
   <link rel="icon" href="data:,">
 
@@ -72,9 +72,28 @@
 
       <div class="flex items-center justify-between h-16">
 
-        <!-- Iniciales -->
-        <a href="#inicio" class="font-extrabold text-brand-700">
-          RSR
+        <!-- LOGO / FOTO PEQUEÑA -->
+        <!--
+          Guarda tu logo dentro de la carpeta "img"
+          con el nombre:
+
+          logo.png
+
+          La estructura debe quedar así:
+
+          index.html
+          img/
+              logo.png
+              fotomia.jpeg
+              image.png
+        -->
+
+        <a href="#inicio" class="flex items-center" aria-label="Inicio">
+          <img
+            src="img/logo1.jpeg"
+            alt="Logo de Silva Rendon Ricardo"
+            class="h-10 w-10 rounded-full object-cover border-2 border-brand-400"
+          >
         </a>
 
         <nav class="hidden sm:flex items-center gap-6 text-sm font-medium text-slate-600">
@@ -121,25 +140,18 @@
       <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
 
 
-        <!-- ===================== FOTO ===================== -->
+        <!-- ===================== FOTO PRINCIPAL ===================== -->
 
         <!--
-          IMPORTANTE:
-          Guarda tu foto dentro de una carpeta llamada "img"
-          y ponle exactamente el nombre:
+          Guarda tu foto principal dentro de "img"
+          con el nombre:
 
-          foto.jpg
-
-          La estructura debe quedar así:
-
-          index.html
-          img/
-              foto.jpg
+          fotomia.jpeg
         -->
 
         <img
           src="img/fotomia.jpeg"
-          alt="Foto de Ricardo Silva Rendon"
+          alt="Foto de Silva Rendon Ricardo"
           class="h-28 w-28 rounded-full object-cover border-4 border-brand-400 flex-none"
         >
 
@@ -153,7 +165,7 @@
           </p>
 
           <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
-            Ricardo Silva Rendon
+            Silva Rendon Ricardo
           </h1>
 
           <p class="text-slate-300 mt-2">
@@ -177,7 +189,7 @@
           </p>
 
 
-          <!-- BOTONES -->
+          <!-- ===================== BOTONES ===================== -->
 
           <div class="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
 
@@ -190,6 +202,18 @@
               class="rounded-lg bg-white text-ink font-semibold px-4 py-2 text-sm hover:bg-slate-100 transition"
             >
               GitHub
+            </a>
+
+
+            <!-- LinkedIn -->
+
+            <a
+              href="https://www.linkedin.com/in/silva-rendon-ricardo-228863434/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-lg bg-white text-ink font-semibold px-4 py-2 text-sm hover:bg-slate-100 transition"
+            >
+              LinkedIn
             </a>
 
 
@@ -229,7 +253,7 @@
     </h2>
 
     <p class="mt-4 text-slate-600 max-w-2xl">
-      Mi nombre es Ricardo Silva Rendon y soy estudiante de la Universidad
+      Mi nombre es Silva Rendon Ricardo y soy estudiante de la Universidad
       Tecnológica de Hermosillo. Actualmente estudio Desarrollo de Software
       y me interesa aprender programación, desarrollo web y creación de
       aplicaciones. Durante este curso he trabajado con tecnologías como
@@ -313,18 +337,9 @@
     </p>
 
 
-    <!-- ESPACIO PARA CAPTURA -->
+    <!-- ===================== IMAGEN DEL PROYECTO ===================== -->
 
     <div class="mt-8 rounded-2xl border border-slate-200 overflow-hidden">
-
-      <!--
-        Si tienes una captura de pantalla de tu proyecto,
-        guárdala como:
-
-        img/proyecto.png
-
-        y descomenta la siguiente imagen.
-      -->
 
       <img
         src="img/image.png"
@@ -335,7 +350,7 @@
     </div>
 
 
-    <!-- BOTÓN PROYECTO -->
+    <!-- ===================== BOTÓN PROYECTO ===================== -->
 
     <div class="mt-6">
 
@@ -507,6 +522,18 @@
         GitHub: SilvaRendonRicardo
       </a>
 
+
+      <!-- LINKEDIN -->
+
+      <a
+        href="https://www.linkedin.com/in/silva-rendon-ricardo-228863434/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:border-brand-400 hover:text-brand-700 transition"
+      >
+        LinkedIn
+      </a>
+
     </div>
 
   </section>
@@ -521,7 +548,7 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between gap-2">
 
       <p>
-        © 2026 Ricardo Silva Rendon. Todos los derechos reservados.
+        © 2026 Silva Rendon Ricardo. Todos los derechos reservados.
       </p>
 
       <p>
