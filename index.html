@@ -18,23 +18,18 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              200: '#c7d2fe',
-              300: '#a5b4fc',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#3730a3',
-              900: '#312e81'
-            },
-            ink: '#0f172a'
+            noche: '#0A1128',
+            panel: '#121B3A',
+            borde: '#24305C',
+            senal: '#2DD4E6',
+            pulso: '#8B6CFF',
+            nube: '#E8EDFF',
+            niebla: '#93A0C6',
+            claro: '#F2F5FD'
           },
           fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace']
+            display: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
           }
         }
       }
@@ -44,7 +39,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     html {
@@ -52,21 +47,61 @@
     }
 
     body {
-      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
     }
 
-    code,
-    .font-mono {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    /* Cuadrícula tenue tipo pantalla, solo en las secciones oscuras */
+    .rejilla {
+      background-image:
+        linear-gradient(rgba(45, 212, 230, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 212, 230, 0.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Anillo degradado alrededor de la foto principal */
+    .anillo {
+      background: conic-gradient(from 200deg, #2DD4E6, #8B6CFF, #2DD4E6);
+      padding: 4px;
+      border-radius: 9999px;
+    }
+
+    /* Borde degradado para la entrega más reciente */
+    .destacada {
+      background:
+        linear-gradient(#121B3A, #121B3A) padding-box,
+        linear-gradient(135deg, #2DD4E6, #8B6CFF) border-box;
+      border: 1px solid transparent;
+    }
+
+    /* Foco visible para quien navega con teclado */
+    a:focus-visible {
+      outline: 2px solid #2DD4E6;
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /* Punto que parpadea junto a la entrega en línea */
+    @keyframes latido {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .en-linea {
+      animation: latido 2s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .en-linea { animation: none; }
     }
   </style>
 </head>
 
-<body class="bg-slate-50 text-ink antialiased">
+<body class="bg-claro text-noche antialiased">
 
   <!-- ===================== NAV ===================== -->
 
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <header class="sticky top-0 z-50 bg-noche/85 backdrop-blur border-b border-borde">
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -77,44 +112,47 @@
           Guarda tu logo dentro de la carpeta "img"
           con el nombre:
 
-          logo.png
+          logo1.jpeg
 
           La estructura debe quedar así:
 
           index.html
           img/
-              logo.png
+              logo1.jpeg
               fotomia.jpeg
               image.png
         -->
 
-        <a href="#inicio" class="flex items-center" aria-label="Inicio">
+        <a href="#inicio" class="flex items-center gap-3" aria-label="Inicio">
           <img
             src="img/logo1.jpeg"
             alt="Logo de Silva Rendon Ricardo"
-            class="h-10 w-10 rounded-full object-cover border-2 border-brand-400"
+            class="h-10 w-10 rounded-full object-cover ring-2 ring-senal/70"
           >
+          <span class="hidden sm:inline font-display font-semibold text-nube">
+            Ricardo Silva
+          </span>
         </a>
 
-        <nav class="hidden sm:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <nav class="hidden sm:flex items-center gap-6 text-sm font-medium text-niebla">
 
-          <a href="#sobre-mi" class="hover:text-brand-700">
+          <a href="#sobre-mi" class="hover:text-senal transition-colors">
             Sobre mí
           </a>
 
-          <a href="#stack" class="hover:text-brand-700">
+          <a href="#stack" class="hover:text-senal transition-colors">
             Stack
           </a>
 
-          <a href="#proyecto" class="hover:text-brand-700">
+          <a href="#proyecto" class="hover:text-senal transition-colors">
             Proyecto
           </a>
 
-          <a href="#entregas" class="hover:text-brand-700">
+          <a href="#entregas" class="hover:text-senal transition-colors">
             Entregas
           </a>
 
-          <a href="#contacto" class="hover:text-brand-700">
+          <a href="#contacto" class="hover:text-senal transition-colors">
             Contacto
           </a>
 
@@ -129,15 +167,17 @@
 
   <!-- ===================== INICIO ===================== -->
 
-  <section id="inicio" class="relative overflow-hidden bg-ink">
+  <section id="inicio" class="relative overflow-hidden bg-noche">
 
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-900 via-ink to-slate-900"></div>
+    <div class="absolute inset-0 rejilla"></div>
 
-    <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-brand-600/30 blur-3xl"></div>
+    <div class="absolute -top-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-pulso/25 blur-3xl"></div>
 
-    <div id="datos-alumno" class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <div class="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-senal/15 blur-3xl"></div>
 
-      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+    <div id="datos-alumno" class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8">
 
 
         <!-- ===================== FOTO PRINCIPAL ===================== -->
@@ -149,39 +189,38 @@
           fotomia.jpeg
         -->
 
-        <img
-          src="img/fotomia.jpeg"
-          alt="Foto de Silva Rendon Ricardo"
-          class="h-28 w-28 rounded-full object-cover border-4 border-brand-400 flex-none"
-        >
+        <div class="anillo flex-none shadow-[0_0_40px_rgba(45,212,230,0.25)]">
+          <img
+            src="img/fotomia.jpeg"
+            alt="Foto de Silva Rendon Ricardo"
+            class="h-32 w-32 rounded-full object-cover border-4 border-noche"
+          >
+        </div>
 
 
         <!-- ===================== DATOS ===================== -->
 
         <div class="text-center sm:text-left">
 
-          <p class="text-brand-300 text-xs font-semibold uppercase tracking-wide">
-            Portafolio · Aplicaciones Web
+          <p class="inline-flex items-center gap-2 text-senal text-sm font-medium">
+            <span class="h-2 w-2 rounded-full bg-senal"></span>
+            Portafolio de Aplicaciones Web
           </p>
 
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          <h1 class="font-display text-4xl sm:text-6xl font-bold text-nube mt-3 tracking-tight leading-none">
             Silva Rendon Ricardo
           </h1>
 
-          <p class="text-slate-300 mt-2">
-            Matrícula:
-            <span class="text-white font-semibold">
-              22331179
+          <div class="mt-5 flex flex-wrap justify-center sm:justify-start gap-2 text-sm">
+            <span class="rounded-md bg-panel border border-borde px-3 py-1 text-niebla">
+              Matrícula <span class="text-nube font-semibold">22331179</span>
             </span>
-
-            · Grupo:
-
-            <span class="text-white font-semibold">
-              TIDSM4-1
+            <span class="rounded-md bg-panel border border-borde px-3 py-1 text-niebla">
+              Grupo <span class="text-nube font-semibold">TIDSM4-1</span>
             </span>
-          </p>
+          </div>
 
-          <p class="mt-4 text-slate-300 max-w-xl">
+          <p class="mt-5 text-niebla max-w-xl leading-relaxed">
             Soy estudiante de la Universidad Tecnológica de Hermosillo.
             Me gusta la programación y el desarrollo de aplicaciones web,
             especialmente crear proyectos funcionales utilizando diferentes
@@ -191,7 +230,7 @@
 
           <!-- ===================== BOTONES ===================== -->
 
-          <div class="mt-6 flex flex-wrap justify-center sm:justify-start gap-3">
+          <div class="mt-8 flex flex-wrap justify-center sm:justify-start gap-3">
 
             <!-- GitHub -->
 
@@ -199,7 +238,7 @@
               href="https://github.com/SilvaRendonRicardo"
               target="_blank"
               rel="noopener noreferrer"
-              class="rounded-lg bg-white text-ink font-semibold px-4 py-2 text-sm hover:bg-slate-100 transition"
+              class="rounded-lg border border-borde bg-panel text-nube font-semibold px-4 py-2 text-sm hover:border-senal hover:text-senal transition-colors"
             >
               GitHub
             </a>
@@ -211,7 +250,7 @@
               href="https://www.linkedin.com/in/silva-rendon-ricardo-228863434/"
               target="_blank"
               rel="noopener noreferrer"
-              class="rounded-lg bg-white text-ink font-semibold px-4 py-2 text-sm hover:bg-slate-100 transition"
+              class="rounded-lg border border-borde bg-panel text-nube font-semibold px-4 py-2 text-sm hover:border-senal hover:text-senal transition-colors"
             >
               LinkedIn
             </a>
@@ -221,9 +260,9 @@
 
             <a
               href="#entregas"
-              class="rounded-lg bg-brand-600 text-white font-semibold px-4 py-2 text-sm hover:bg-brand-500 transition"
+              class="rounded-lg bg-gradient-to-r from-senal to-pulso text-noche font-semibold px-5 py-2 text-sm hover:opacity-90 transition-opacity"
             >
-              Ver mis entregas →
+              Ver mis entregas
             </a>
 
           </div>
@@ -241,24 +280,30 @@
 
   <section
     id="sobre-mi"
-    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
   >
 
-    <p class="text-brand-600 font-semibold text-xs uppercase tracking-wide">
-      Sobre mí
-    </p>
+    <div class="grid md:grid-cols-[1fr_2fr] gap-8 items-start">
 
-    <h2 class="text-2xl font-extrabold mt-1">
-      Un poco más de contexto
-    </h2>
+      <div>
+        <p class="text-pulso font-semibold text-sm">
+          Sobre mí
+        </p>
 
-    <p class="mt-4 text-slate-600 max-w-2xl">
-      Mi nombre es Silva Rendon Ricardo y soy estudiante de la Universidad
-      Tecnológica de Hermosillo. Actualmente estudio Desarrollo de Software
-      y me interesa aprender programación, desarrollo web y creación de
-      aplicaciones. Durante este curso he trabajado con tecnologías como
-      HTML, Tailwind CSS, Django, Python, MySQL, Git, GitHub y Render.
-    </p>
+        <h2 class="font-display text-3xl font-bold mt-1 tracking-tight">
+          Un poco más de contexto
+        </h2>
+      </div>
+
+      <p class="text-slate-600 text-lg leading-relaxed max-w-2xl border-l-2 border-senal pl-6">
+        Mi nombre es Silva Rendon Ricardo y soy estudiante de la Universidad
+        Tecnológica de Hermosillo. Actualmente estudio Desarrollo de Software
+        y me interesa aprender programación, desarrollo web y creación de
+        aplicaciones. Durante este curso he trabajado con tecnologías como
+        HTML, Tailwind CSS, Django, Python, MySQL, Git, GitHub y Render.
+      </p>
+
+    </div>
 
   </section>
 
@@ -270,40 +315,46 @@
     class="bg-white border-y border-slate-200"
   >
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
-      <p class="text-brand-600 font-semibold text-xs uppercase tracking-wide">
+      <p class="text-pulso font-semibold text-sm">
         Stack
       </p>
 
-      <h2 class="text-2xl font-extrabold mt-1">
+      <h2 class="font-display text-3xl font-bold mt-1 tracking-tight">
         Tecnologías que usé en este curso
       </h2>
 
 
-      <div class="mt-6 flex flex-wrap gap-3">
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
 
-        <span class="px-4 py-2 rounded-full bg-orange-50 text-orange-700 text-sm font-semibold border border-orange-200">
+        <span class="flex items-center gap-3 rounded-xl border border-slate-200 bg-claro px-4 py-3 text-sm font-semibold">
+          <span class="h-2.5 w-2.5 rounded-full bg-orange-500"></span>
           HTML5 semántico
         </span>
 
-        <span class="px-4 py-2 rounded-full bg-sky-50 text-sky-700 text-sm font-semibold border border-sky-200">
+        <span class="flex items-center gap-3 rounded-xl border border-slate-200 bg-claro px-4 py-3 text-sm font-semibold">
+          <span class="h-2.5 w-2.5 rounded-full bg-sky-500"></span>
           Tailwind CSS
         </span>
 
-        <span class="px-4 py-2 rounded-full bg-emerald-50 text-emerald-700 text-sm font-semibold border border-emerald-200">
+        <span class="flex items-center gap-3 rounded-xl border border-slate-200 bg-claro px-4 py-3 text-sm font-semibold">
+          <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
           Django (Python)
         </span>
 
-        <span class="px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-200">
+        <span class="flex items-center gap-3 rounded-xl border border-slate-200 bg-claro px-4 py-3 text-sm font-semibold">
+          <span class="h-2.5 w-2.5 rounded-full bg-blue-600"></span>
           MySQL
         </span>
 
-        <span class="px-4 py-2 rounded-full bg-violet-50 text-violet-700 text-sm font-semibold border border-violet-200">
+        <span class="flex items-center gap-3 rounded-xl border border-slate-200 bg-claro px-4 py-3 text-sm font-semibold">
+          <span class="h-2.5 w-2.5 rounded-full bg-violet-500"></span>
           Render
         </span>
 
-        <span class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-semibold border border-slate-300">
+        <span class="flex items-center gap-3 rounded-xl border border-slate-200 bg-claro px-4 py-3 text-sm font-semibold">
+          <span class="h-2.5 w-2.5 rounded-full bg-slate-700"></span>
           Git + GitHub
         </span>
 
@@ -318,18 +369,18 @@
 
   <section
     id="proyecto"
-    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
   >
 
-    <p class="text-brand-600 font-semibold text-xs uppercase tracking-wide">
-      Proyecto Integrador
+    <p class="text-pulso font-semibold text-sm">
+      Proyecto integrador
     </p>
 
-    <h2 class="text-2xl font-extrabold mt-1">
+    <h2 class="font-display text-3xl font-bold mt-1 tracking-tight">
       INE Personal
     </h2>
 
-    <p class="mt-4 text-slate-600 max-w-2xl">
+    <p class="mt-4 text-slate-600 max-w-2xl leading-relaxed">
       Proyecto web desarrollado durante el curso de Aplicaciones Web.
       El proyecto busca crear una aplicación funcional utilizando
       tecnologías de desarrollo web, trabajando con Django, Python,
@@ -339,11 +390,17 @@
 
     <!-- ===================== IMAGEN DEL PROYECTO ===================== -->
 
-    <div class="mt-8 rounded-2xl border border-slate-200 overflow-hidden">
+    <div class="mt-8 rounded-2xl bg-noche p-2 shadow-xl shadow-pulso/10">
+
+      <div class="flex items-center gap-1.5 px-3 py-2">
+        <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+      </div>
 
       <img
         src="img/image.png"
-        class="w-full object-cover"
+        class="w-full object-cover rounded-xl"
         alt="Captura del proyecto INE Personal"
       >
 
@@ -358,9 +415,9 @@
         href="https://ine-personal-srr.onrender.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-3 text-sm transition"
+        class="inline-flex items-center gap-2 rounded-lg bg-noche hover:bg-panel text-nube font-semibold px-5 py-3 text-sm transition-colors"
       >
-        Ver proyecto en vivo →
+        Ver proyecto en vivo
       </a>
 
     </div>
@@ -372,33 +429,35 @@
 
   <section
     id="entregas"
-    class="bg-ink text-white"
+    class="relative bg-noche text-nube overflow-hidden"
   >
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="absolute inset-0 rejilla"></div>
 
-      <p class="text-brand-300 font-semibold text-xs uppercase tracking-wide">
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+      <p class="text-senal font-semibold text-sm">
         Evidencia por unidad
       </p>
 
-      <h2 class="text-2xl font-extrabold mt-1">
+      <h2 class="font-display text-3xl font-bold mt-1 tracking-tight">
         Mis entregas publicadas
       </h2>
 
-      <p class="mt-3 text-slate-300 max-w-2xl">
+      <p class="mt-3 text-niebla max-w-2xl">
         Cada enlace corresponde a una versión del proyecto publicada
         durante las diferentes unidades del curso.
       </p>
 
 
-      <ul class="mt-8 grid sm:grid-cols-2 gap-4">
+      <ul class="mt-10 grid sm:grid-cols-2 gap-4">
 
 
         <!-- ===================== UNIDAD 1 ===================== -->
 
-        <li class="rounded-xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition">
+        <li class="rounded-xl bg-panel border border-borde p-6">
 
-          <p class="text-xs font-bold text-orange-300 uppercase">
+          <p class="font-display text-sm font-semibold text-orange-300">
             Unidad 1
           </p>
 
@@ -410,7 +469,7 @@
             href="https://ine-personal-srr.onrender.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-sm text-brand-300 hover:underline mt-2 inline-block break-all"
+            class="text-sm text-senal hover:underline mt-3 inline-block break-all"
           >
             https://ine-personal-srr.onrender.com
           </a>
@@ -420,9 +479,9 @@
 
         <!-- ===================== UNIDAD 2 ===================== -->
 
-        <li class="rounded-xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition">
+        <li class="rounded-xl bg-panel border border-borde p-6">
 
-          <p class="text-xs font-bold text-emerald-300 uppercase">
+          <p class="font-display text-sm font-semibold text-emerald-300">
             Unidad 2
           </p>
 
@@ -430,7 +489,7 @@
             App Django + MySQL
           </p>
 
-          <p class="text-sm text-slate-400 mt-2">
+          <p class="text-sm text-niebla mt-2">
             Entrega de la aplicación desarrollada durante la Unidad 2.
           </p>
 
@@ -438,13 +497,10 @@
 
 
         <!-- ===================== UNIDAD 3 ===================== -->
-<!-- ===================== UNIDAD 3 ===================== -->
 
-        <!-- ===================== UNIDAD 3 ===================== -->
+        <li class="rounded-xl bg-panel border border-borde p-6">
 
-        <li class="rounded-xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition">
-
-          <p class="text-xs font-bold text-blue-300 uppercase">
+          <p class="font-display text-sm font-semibold text-sky-300">
             Unidad 3
           </p>
 
@@ -452,64 +508,100 @@
             CRUD dinámico con login y sesiones
           </p>
 
-          <p class="text-sm text-slate-400 mt-2">
+          <p class="text-sm text-niebla mt-2">
             Entrega correspondiente al desarrollo de funcionalidades
             dinámicas, autenticación y sesiones.
           </p>
 
-<a
-  href="https://u3s5-silva-rendon-ricardo.onrender.com/servicios"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="text-sm text-brand-300 hover:underline mt-2 inline-block break-all"
->
-  https://u3s5-silva-rendon-ricardo.onrender.com/servicios
-</a>
-          <a
-  href="https://u3s6-silva-rendon-ricardo.onrender.com/servicios"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="text-sm text-brand-300 hover:underline mt-2 inline-block break-all"
->
-  https://u3s6-silva-rendon-ricardo.onrender.com/servicios
-</a>
+          <div class="mt-3 flex flex-col gap-1">
+
+            <a
+              href="https://u3s5-silva-rendon-ricardo.onrender.com/servicios"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-senal hover:underline break-all"
+            >
+              https://u3s5-silva-rendon-ricardo.onrender.com/servicios
+            </a>
+
+            <a
+              href="https://u3s6-silva-rendon-ricardo.onrender.com/servicios"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-senal hover:underline break-all"
+            >
+              https://u3s6-silva-rendon-ricardo.onrender.com/servicios
+            </a>
+
+          </div>
 
         </li>
 
+
         <!-- ===================== UNIDAD 4 ===================== -->
 
-        <li class="rounded-xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition">
+        <li class="destacada rounded-xl p-6 shadow-[0_0_40px_rgba(139,108,255,0.18)]">
 
-          <p class="text-xs font-bold text-purple-300 uppercase">
-            Unidad 4
-          </p>
+          <div class="flex items-center justify-between gap-3">
 
+            <p class="font-display text-sm font-semibold text-pulso">
+              Unidad 4
+            </p>
 
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-senal/10 px-2.5 py-0.5 text-xs font-medium text-senal">
+              <span class="en-linea h-1.5 w-1.5 rounded-full bg-senal"></span>
+              Versión final en línea
+            </span>
+
+          </div>
 
           <p class="font-semibold mt-1">
             Proyecto integrador final
           </p>
-                    <a
-  href="https://u4s7-silva-rendon-ricardo.onrender.com/servicios"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="text-sm text-brand-300 hover:underline mt-2 inline-block break-all"
->
-  https://u4s7-silva-rendon-ricardo.onrender.com/servicios
-</a>
 
-                              <a
-  href="https://u4s8-silva-rendon-ricardo.onrender.com/servicios/"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="text-sm text-brand-300 hover:underline mt-2 inline-block break-all"
->
-  https://u4s8-silva-rendon-ricardo.onrender.com/servicios/
-</a>
-
-          <p class="text-sm text-slate-400 mt-2">
-            Versión final del proyecto integrador.
+          <p class="text-sm text-niebla mt-2">
+            Categorías, facturas con detalle y 6 reportes SQL, publicados en Render.
           </p>
+
+          <!-- Práctica final u4p3 (la más reciente) -->
+
+          <a
+            href="https://u4p3-silva-rendon-ricardo.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 flex items-center justify-between gap-3 rounded-lg bg-gradient-to-r from-senal to-pulso px-4 py-3 text-noche font-semibold text-sm hover:opacity-90 transition-opacity"
+          >
+            <span class="break-all">u4p3-silva-rendon-ricardo.onrender.com</span>
+            <span class="flex-none">Abrir</span>
+          </a>
+
+          <!-- Versiones anteriores de la Unidad 4 -->
+
+          <p class="text-xs text-niebla mt-4">
+            Versiones anteriores
+          </p>
+
+          <div class="mt-1 flex flex-col gap-1">
+
+            <a
+              href="https://u4s7-silva-rendon-ricardo.onrender.com/servicios"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-senal hover:underline break-all"
+            >
+              https://u4s7-silva-rendon-ricardo.onrender.com/servicios
+            </a>
+
+            <a
+              href="https://u4s8-silva-rendon-ricardo.onrender.com/servicios/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-senal hover:underline break-all"
+            >
+              https://u4s8-silva-rendon-ricardo.onrender.com/servicios/
+            </a>
+
+          </div>
 
         </li>
 
@@ -524,26 +616,26 @@
 
   <section
     id="contacto"
-    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
   >
 
-    <p class="text-brand-600 font-semibold text-xs uppercase tracking-wide">
+    <p class="text-pulso font-semibold text-sm">
       Contacto
     </p>
 
-    <h2 class="text-2xl font-extrabold mt-1">
+    <h2 class="font-display text-3xl font-bold mt-1 tracking-tight">
       Hablemos
     </h2>
 
 
-    <div class="mt-6 flex flex-wrap gap-4 text-sm">
+    <div class="mt-8 flex flex-wrap gap-3 text-sm">
 
 
       <!-- CORREO -->
 
       <a
         href="mailto:a22331179@uthermosillo.edu.mx"
-        class="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:border-brand-400 hover:text-brand-700 transition"
+        class="rounded-lg bg-noche text-nube px-4 py-3 font-semibold hover:bg-panel transition-colors"
       >
         ✉️ a22331179@uthermosillo.edu.mx
       </a>
@@ -555,7 +647,7 @@
         href="https://github.com/SilvaRendonRicardo"
         target="_blank"
         rel="noopener noreferrer"
-        class="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:border-brand-400 hover:text-brand-700 transition"
+        class="rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold text-slate-700 hover:border-pulso hover:text-pulso transition-colors"
       >
         GitHub: SilvaRendonRicardo
       </a>
@@ -567,7 +659,7 @@
         href="https://www.linkedin.com/in/silva-rendon-ricardo-228863434/"
         target="_blank"
         rel="noopener noreferrer"
-        class="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:border-brand-400 hover:text-brand-700 transition"
+        class="rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold text-slate-700 hover:border-pulso hover:text-pulso transition-colors"
       >
         LinkedIn
       </a>
@@ -580,8 +672,10 @@
   <!-- ===================== FOOTER ===================== -->
 
   <footer
-    class="bg-slate-100 border-t border-slate-200 text-slate-500 text-sm"
+    class="bg-noche text-niebla text-sm"
   >
+
+    <div class="h-px bg-gradient-to-r from-senal via-pulso to-transparent"></div>
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between gap-2">
 
@@ -590,7 +684,7 @@
       </p>
 
       <p>
-        Aplicaciones Web · TIDSM4-1
+        Aplicaciones Web, TIDSM4-1
       </p>
 
     </div>
